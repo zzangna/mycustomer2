@@ -183,6 +183,7 @@ public class CustomerController {
                 result = true;
                 mapper.deleteCustomer(id); // 탈퇴
                 session.invalidate();  // 로그아웃 처리
+
             }
             // 틀리면 -> 결과만 화면에 전달
             model.addAttribute("result", result);
