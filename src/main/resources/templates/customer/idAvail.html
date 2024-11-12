@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>idAvail</title>
+    <link th:href="@{/idAvail.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<br />
+<h2 align="center"> 아이디 중복 확인 </h2>
+<th:block th:if="${result == true}">
+    <table>
+        <tr><td>입력하신 <a>[[${param.id}]]</a>는 사용하실 수 있는 아이디 입니다. <br />
+                <button type="button" onclick="setId()">닫기</button>
+            </td>
+        </tr>
+    </table>
+</th:block>
+<th:block th:if="${result == false}">
+    <table>
+        <tr>
+            <td><a>[[${param.id}]] </a>는 이미 사용중인 아이디 입니다.</td>
+        </tr>
+    </table>
+    <form action="/customer/idAvail">
+        <table>
+            <tr>
+                <td>다른 아이디를 선택하세요. <br />
+                    <input type="text" name="id" />
+                    <input type="submit" value="아이디 중복확인" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</th:block>
+
+<script th:inline="javascript">
+    function setId(){
+        let newId = [[${param.id}]];
+        opener.document.inputForm.id.value = newId;
+        self.close(); // 팝업 닫기
+    }
+</script>
+
+</body>
+</html>

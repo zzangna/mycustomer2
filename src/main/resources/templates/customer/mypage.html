@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>mypage</title>
+  <link th:href="@{/customer.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div th:if="${session.sid == null}">
+  <script>
+    alert("로그인 후 접근가능합니다.");
+    window.location.href = "/customer/login"; // 로그인폼 페이지로 강제 이동
+  </script>
+</div>
+<div th:if="${session.sid != null}">
+  <br />
+  <h1 align="center"> [[${session.sid}]]'s page </h1>
+  <table>
+    <tr>
+      <td><a th:href="@{/customer/{id}/modify(id=${session.sid})}">회원정보수정</a></td>
+    </tr>
+    <tr>
+      <td><a th:href="@{/customer/{id}/delete(id=${session.sid})}">회원탈퇴</a></td>
+    </tr>
+    <tr>
+      <td><a th:href="@{/customer/home}">홈으로</a></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

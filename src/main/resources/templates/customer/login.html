@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+
+  <title>로그인</title>
+  <link th:href="@{/login.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table>
+  <tr>
+    <td><h2 align="center">로그인</h2></td>
+  </tr>
+  <form action="/customer/login" method="post" id="form" onclick="return fieldCheck()">
+    <tr><td>아이디</td></tr>
+    <tr><td><input type="text" name="id" class="text"></td></tr>
+
+    <tr><td>비밀번호</td></tr>
+    <tr><td><input type="password" name="pw" class="text"></td></tr>
+    <tr>
+      <td colspan="2"> 자동로그인
+        <input type="checkbox" name="auto" value="auto" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" class="btn" value="로그인" onclick="window.location='/customer/mypage'"/>
+        <input type="button" class="btn" value="취소" onclick="window.location='/customer/home'" />
+        <input type="button" class="btn" value="회원가입" onclick="window.location='/customer/join'" />
+      </td>
+    </tr>
+
+    </table>
+
+  </form>
+
+  <script th:inline="javascript">
+    function filedCheck() {
+      let form = document.getElementById("form")
+      if(!form.id.value){
+        alert("아이디를 입력하세요");
+        return false;
+      }
+      if(!form.pw.value){
+        alert("비밀번호를 입력하세요");
+        return false;
+      }
+    }
+  </script>

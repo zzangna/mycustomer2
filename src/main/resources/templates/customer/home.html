@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title> main page </title>
+  <link th:href="@{/customer.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<br />
+<h2 align="center"> Main Page </h2>
+<table  th:if="${session.sid == null}" >
+  <tr >
+    <td class="text"><a href="/customer/join" th:href="@{/customer/join}">회원 가입</a></td>
+  </tr>
+  <tr>
+    <td class="text"><a href="/customer/list" th:href="@{/customer/list}">회원 목록</a></td>
+  </tr>
+  <tr class="text">
+    <td class="text"><a href="/customer/login" th:href="@{/customer/login}">로그인</a></td>
+  </tr>
+</table>
+
+<table th:if="${session.sid != null}">
+  <tr>
+    <td><a href="/customer/mypage" th:href="@{/customer/{id}(id=${session.sid})}">마이페이지</a></td>
+  </tr>
+  <tr>
+    <td><a href="/customer/logout" th:href="@{/customer/logout}">로그아웃</a></td>
+  </tr>
+  </tr>
+
+</table>
+</body>
+</html>

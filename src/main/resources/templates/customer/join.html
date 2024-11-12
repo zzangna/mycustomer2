@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>회원가입 </title>
+    <link th:href="@{/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table>
+    <tr>
+        <td><h2 align="center">회원가입</h2></td>
+    </tr>
+ <form action="/customer/join" method="post" id="form" name="inputForm" onsubmit="return fieldCheck()">
+    <tr><td>아이디</td></tr>
+    <tr><td><input type="text" name="id" class="text"></td></tr>
+     <tr><td>아이디 중복확인</td><tr>
+     <tr><td><input type="button" value="아이디 중복확인" onclick="openIdAvail(this.form)"/></td></tr>
+    <tr><td>비밀번호</td></tr>
+    <tr><td><input type="password" name="pw" class="text"></td></tr>
+    <tr><td>비밀번호 확인</td></tr>
+    <tr><td><input type="password" name="pwch" class="text"></td></tr>
+    <tr><td>이름</td></tr>
+    <tr><td><input type="text" name="name" class="text"></td></tr>
+    <tr><td>이메일</td></tr>
+    <tr>
+        <td><input type="text" name="email" class="email"> @
+            <select>
+                <option>naver.com</option>
+                <option>gmail.com</option>
+                <option>daum.net</option>
+                <option>nate.com</option>
+            </select>
+        </td>
+    </tr></br>
+    <dl>
+        <tr>
+            <td><dt>이용약관 동의</dt></td>
+        </tr>
+
+        <tr>
+            <td><dt><input type="checkbox" name="allCheck" id="check_all" > 전체 동의합니다</dt></td>
+        </tr><br>
+
+        <tr>
+            <td><dd><input type="checkbox" name="dong1" value="dong1">이용약관 필수</dd></td>
+        </tr><br>
+
+        <tr>
+            <td><dd><input type="checkbox" name="dong1" value="dong1">개인정보처리방침 동의 필수</dd></td>
+        </tr><br>
+
+        <tr>
+            <td><dd><input type="checkbox" name="dong1" value="dong1">무료배송, 할인쿠폰 등 혜택 정보 수신 동의</dd></td>
+        </tr><br>
+
+        <tr>
+            <td><dd><div class="checksns">
+                <input type="checkbox" name="sns" value="sns">SNS </li>
+                <input type="checkbox" name="이메일" value="email">email <br>
+            </div></dd></td>
+        </tr>
+    </dl>
+    <tr><td><input type="submit" value="가입하기" class="btn"></td></tr>
+    <tr><td><input type="button" value="취소" class="btn" onclick="window.location='/customer/home'"></td></tr>
+
+ </form>
+</table>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script th:inline="javascript">
+    // id 중복확인 함수
+    function openIdAvail(inputForm) {
+        // id 입력란에 값 있는지부터 체크
+        if (inputForm.id.value == "" || !inputForm.id.value) {
+            alert("아이디를 입력하세요.");
+            return;  // 함수 종료!
+        }
+        // 중복확인 팝업창 띄우기 : open(url, name, options)
+        let url = "/customer/idAvail?id=" + inputForm.id.value; // 팝업창으로 요청할 주소 준비
+        open(url, "confirm", "toolbar=no, location=no, status=no, menubar=no, scrollbars=no, width=500, height=500");
+
+    }
+</script>
+
+<script>
+        //전체 동의
+        $("#check_all").click(function (){
+            if($("input:checkbox[id='check_all']").prop("checked")) {
+                $("input[type=checkbox]").prop('checked,true');
+            } else {
+                $("input[type=checkbox]").prop('checked,false');
+            }
+        });
+
+</script>
+
+
+<script>
+// 유효성 검사 함수
+function fieldCheck() {
+let form = document.getElementById("form");
+if(!form.id.value) {
+alert("아이디를 입력하세요");
+return false; // submit 실행 취소
+}
+if(!form.pw.value) {
+alert("비밀번호를 입력하세요");
+return false;
+}
+if(!form.pwch.value) {
+alert("비밀번호 확인란을 입력하세요");
+return false;
+}
+if(!form.name.value) {
+alert("이름을 입력하세요");
+return false;
+}
+if(!form.email.value) {
+    alert("이메일을 입력하세요");
+    return false;
+    }
+if(form.pw.value != form.pwch.value) {
+alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+return false;
+}
+}
+</script>
+
+<script>
+
+
+</script>
+</body>
+</html>
